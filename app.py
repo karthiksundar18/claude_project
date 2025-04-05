@@ -332,6 +332,10 @@ class ActionDetector:
         
         print("Starting webcam capture for action detection...")
         # Start webcam
+        # In the run_detection method, try adding this right after you create the cap:
+# Clear any previous state
+        self.sequence.clear()
+        detection_buffer = []
         cap = cv2.VideoCapture(0)
         if not cap.isOpened():
             print("Error: Could not open camera. Please check your webcam connection.")
@@ -663,7 +667,7 @@ def main():
     actions = ['wave', 'thumbs_up', 'running', 'jumping', 'idle']
     
     # Create detector with shorter sequence length for faster response
-    detector = ActionDetector(actions_list=actions, sequence_length=20, detection_threshold=0.5)
+    detector = ActionDetector(actions_list=actions, sequence_length=30, detection_threshold=0.6)
     
     while True:
         print("\nHuman Action Detection System")
